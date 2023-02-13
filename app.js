@@ -11,7 +11,12 @@ var app = express();
 
 //define moongose database
 const mongoDB = "mongodb://127.0.0.1/my_database";
+// Wait for database to connect, logging an error if there is a problem 
 
+main().catch(err => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
